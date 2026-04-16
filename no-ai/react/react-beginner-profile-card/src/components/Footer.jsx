@@ -1,7 +1,7 @@
         export default function Footer() {
           return (
             <footer className="card footer">
-              <p>Update this area with your own message.</p>
+              <p>Brent is kinda a big deal.</p>
             </footer>
           )
         }

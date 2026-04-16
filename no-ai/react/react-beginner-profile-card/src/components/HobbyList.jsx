@@ -1,4 +1,4 @@
-        const hobbies = ['Reading', 'Gaming', 'Music']
+        const hobbies = ['Hunting', 'Fishing', 'Drinking Beer']
 
         export default function HobbyList() {
           return (

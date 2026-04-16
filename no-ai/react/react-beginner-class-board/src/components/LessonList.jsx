@@ -1,8 +1,8 @@
         const lessons = [
-          'HTML Basics',
-          'CSS Basics',
-          'JavaScript Intro',
-          'React Components'
+          'Quantum Computing 101',
+          'Advanced Ballistics Calculations',
+          'Mead Making for Beginners',
+          'Advanced Team Tactics'
         ]
 
         export default function LessonList() {

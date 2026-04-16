@@ -33,15 +33,18 @@
       const output = document.getElementById("output");
 
       // STUDENTS: replace this starter solution with your own work
-      const myName = "Alex";
-      const myAge = 21;
-      const favoriteHobby = "drawing";
+      const myName = "Mike";
+      const myAge = "older than most, younger than some";
+      const favoriteHobby = "learning from great instructors like Brent";
+      const interestingFact = "I am not sure if this is really all we are supposed to do with this excercise.";
+      const pic="../html/img/brent.jpg";
 
       function introduceYourself() {
-        return "Hi, my name is " + myName + ". I am " + myAge + " years old and I enjoy " + favoriteHobby + ".";
+        return "Hi, my name is " + myName + ". I am " + myAge + " and I enjoy " + favoriteHobby + ". " + interestingFact +
+        "so I added a picture of my favorite instructor, Brent, to make this page more interesting! " + "<br><img src='" + pic + "' alt='Brent' width='200' />";
       }
 
-      output.textContent = introduceYourself();
+      output.innerHTML = introduceYourself();
     }
   </script>
 </body>

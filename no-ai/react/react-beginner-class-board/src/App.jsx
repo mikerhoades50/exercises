@@ -9,7 +9,8 @@
               <Header />
               <section className="card">
                 <h2>Course Overview</h2>
-                <p>Edit this paragraph to describe the class and what students will learn.</p>
+                <p>In this class, students will learn the fundamentals of React.js and build their first single-page application.</p>
+                
               </section>
               <LessonList />
               <Supplies />

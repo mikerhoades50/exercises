@@ -1,4 +1,4 @@
-        const supplies = ['Laptop', 'Notebook', 'Internet', 'Code Editor', 'Browser']
+        const supplies = ["Surly Darkness", "Founders Dirty Bastard", "Smithwick's", "Shiner Oktoberfest", "Guinness"]
 
         export default function Supplies() {
           return (
