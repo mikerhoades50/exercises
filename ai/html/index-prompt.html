@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Prompt Examples</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Lato:wght@300;400;700&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --bg:       #0e0e12;
+      --surface:  #16161d;
+      --card:     #1d1d26;
+      --border:   #2e2e3e;
+      --gold:     #c9a84c;
+      --gold-lt:  #e8c87a;
+      --text:     #e8e6df;
+      --muted:    #7a7a8c;
+      --green:    #4caf7d;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Lato', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    /* ── PAGE WRAPPER ── */
+    .page {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 0 2rem 6rem;
+    }
+
+    /* ── HERO BAND ── */
+    .hero {
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 5rem;
+    }
+    .hero-inner {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 0 2rem;
+      display: grid;
+      grid-template-columns: 1fr 380px;
+      align-items: center;
+      min-height: 340px;
+    }
+    .hero-copy {
+      padding: 4rem 3rem 4rem 0;
+      animation: fadeUp 0.8s ease both;
+    }
+    .kicker {
+      font-size: 0.72rem;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1rem;
+    }
+    h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.6rem, 5vw, 4rem);
+      font-weight: 900;
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+      margin-bottom: 1rem;
+    }
+    h1 span { color: var(--gold); }
+    .hero-sub {
+      font-size: 1rem;
+      font-weight: 300;
+      color: var(--muted);
+      max-width: 420px;
+    }
+    .hero-img {
+      height: 340px;
+      overflow: hidden;
+      position: relative;
+    }
+    .hero-img img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      display: block;
+      filter: sepia(30%) brightness(0.7);
+    }
+    .hero-img::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(to right, var(--surface) 0%, transparent 30%);
+    }
+
+    /* ── SECTION HEADINGS ── */
+    .section-head {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+    .section-head h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.7rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      white-space: nowrap;
+    }
+    .section-head::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+
+    section { margin-bottom: 4.5rem; }
+
+    /* ── TABLE ── */
+    .table-wrap {
+      overflow-x: auto;
+      border: 1px solid var(--border);
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.93rem;
+    }
+    thead {
+      background: var(--card);
+      border-bottom: 1px solid var(--border);
+    }
+    thead th {
+      padding: 1rem 1.4rem;
+      text-align: left;
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-weight: 700;
+    }
+    tbody tr {
+      border-bottom: 1px solid var(--border);
+      transition: background 0.18s;
+    }
+    tbody tr:last-child { border-bottom: none; }
+    tbody tr:hover { background: var(--card); }
+    tbody td {
+      padding: 1rem 1.4rem;
+      vertical-align: top;
+      font-weight: 300;
+    }
+    .tag {
+      display: inline-block;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.2rem 0.6rem;
+    }
+    .tag-blue  { background: rgba(76,175,240,0.15); color: #4cb8f0; }
+    .tag-green { background: rgba(76,175,125,0.15); color: var(--green); }
+    .tag-gold  { background: rgba(201,168,76,0.15); color: var(--gold); }
+
+    /* ── FORM ── */
+    .form-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 2.5rem;
+    }
+    .form-row { margin-bottom: 1.4rem; }
+    label {
+      display: block;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 0.5rem;
+    }
+    input[type="text"],
+    textarea {
+      width: 100%;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      color: var(--text);
+      font-family: 'Lato', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 300;
+      padding: 0.8rem 1rem;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    input[type="text"]:focus,
+    textarea:focus { border-color: var(--gold); }
+    textarea { min-height: 130px; resize: vertical; }
+    .btn-submit {
+      background: var(--gold);
+      color: #0a0a0a;
+      font-family: 'Lato', sans-serif;
+      font-weight: 700;
+      font-size: 0.85rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      padding: 0.85rem 2.5rem;
+      border: none;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.15s;
+    }
+    .btn-submit:hover { background: var(--gold-lt); transform: translateY(-1px); }
+    .btn-submit:active { transform: translateY(0); }
+
+    /* ── SAFETY TIPS ── */
+    .tips-list {
+      list-style: none;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1rem;
+    }
+    .tips-list li {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--gold);
+      padding: 1.1rem 1.3rem;
+      font-size: 0.93rem;
+      font-weight: 300;
+      line-height: 1.55;
+      transition: border-left-color 0.2s;
+    }
+    .tips-list li:hover { border-left-color: var(--green); }
+    .tips-list li strong {
+      display: block;
+      font-weight: 700;
+      font-size: 0.8rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.3rem;
+    }
+
+    /* ── RESOURCE LINK ── */
+    .resource-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.7rem;
+      background: var(--card);
+      border: 1px solid var(--border);
+      padding: 1.1rem 1.8rem;
+      text-decoration: none;
+      color: var(--text);
+      font-size: 0.95rem;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .resource-link:hover { border-color: var(--gold); color: var(--gold-lt); }
+    .resource-link .arrow { font-size: 1.1rem; transition: transform 0.2s; }
+    .resource-link:hover .arrow { transform: translateX(4px); }
+    .resource-label {
+      font-size: 0.68rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--muted);
+      display: block;
+      margin-bottom: 0.15rem;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 2rem 0 0;
+      font-size: 0.82rem;
+      color: var(--muted);
+      text-align: center;
+      letter-spacing: 0.04em;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 680px) {
+      .hero-inner { grid-template-columns: 1fr; }
+      .hero-img   { height: 220px; }
+      .hero-img::after { background: linear-gradient(to bottom, var(--surface) 0%, transparent 40%); }
+      .hero-copy  { padding: 2.5rem 0 1.5rem; }
+      .form-card  { padding: 1.8rem 1.2rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HERO with image -->
+  <div class="hero">
+    <div class="hero-inner">
+      <div class="hero-copy">
+        <p class="kicker">AI Prompt Library</p>
+        <h1>Prompt <span>Examples</span></h1>
+        <p class="hero-sub">A reference guide for crafting effective AI prompts — with real goals, real results, and safe usage tips.</p>
+      </div>
+      <div class="hero-img">
+        <img src="img/brent.jpg" alt="AI Technology"/>
+      </div>
+    </div>
+  </div>
+
+  <div class="page">
+
+    <!-- PROMPT TABLE -->
+    <section>
+      <div class="section-head"><h2>Prompt Examples</h2></div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Prompt</th>
+              <th>Goal</th>
+              <th>Result</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1</td>
+              <td>"Summarize this article in 3 bullet points for a non-technical audience."</td>
+              <td><span class="tag tag-blue">Summarization</span></td>
+              <td>Concise, plain-language summary anyone can read in under a minute.</td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td>"Write a Python function that reads a CSV and returns the top 5 rows sorted by date."</td>
+              <td><span class="tag tag-green">Code Generation</span></td>
+              <td>A working, commented Python function ready to drop into a project.</td>
+            </tr>
+            <tr>
+              <td>3</td>
+              <td>"Act as a marketing strategist and suggest three campaign ideas for a new coffee brand targeting Gen Z."</td>
+              <td><span class="tag tag-gold">Ideation</span></td>
+              <td>Three creative, audience-targeted campaign concepts with brief rationales.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- FORM -->
+    <section>
+      <div class="section-head"><h2>Submit a Prompt Idea</h2></div>
+      <div class="form-card">
+        <div class="form-row">
+          <label for="name">Your Name</label>
+          <input type="text" id="name" name="name" placeholder="e.g. Jane Smith"/>
+        </div>
+        <div class="form-row">
+          <label for="prompt-idea">Prompt Idea</label>
+          <textarea id="prompt-idea" name="prompt_idea" placeholder="Describe your prompt idea here…"></textarea>
+        </div>
+        <button type="button" class="btn-submit">Submit Idea</button>
+      </div>
+    </section>
+
+    <!-- AI SAFETY TIPS -->
+    <section>
+      <div class="section-head"><h2>AI Safety Tips</h2></div>
+      <ul class="tips-list">
+        <li>
+          <strong>Verify Outputs</strong>
+          Always fact-check AI-generated content before publishing or acting on it — AI can confidently state incorrect information.
+        </li>
+        <li>
+          <strong>Protect Personal Data</strong>
+          Never enter sensitive info (SSNs, passwords, private health records) into public AI tools.
+        </li>
+        <li>
+          <strong>Clarify Your Intent</strong>
+          Be explicit about your goals. Ambiguous prompts lead to unpredictable or off-target responses.
+        </li>
+        <li>
+          <strong>Know the Limits</strong>
+          AI models have knowledge cutoffs and can't browse the web unless explicitly given that capability.
+        </li>
+        <li>
+          <strong>Use Responsibly</strong>
+          Avoid using AI to generate misleading content, impersonate others, or produce harmful material.
+        </li>
+        <li>
+          <strong>Review Before Sending</strong>
+          Always read AI-drafted messages carefully — tone, accuracy, and final content are your responsibility.
+        </li>
+      </ul>
+    </section>
+
+    <!-- RESOURCE LINK -->
+    <section>
+      <div class="section-head"><h2>Further Reading</h2></div>
+      <a class="resource-link" href="https://www.anthropic.com/research" target="_blank" rel="noopener">
+        <div>
+          <span class="resource-label">External Resource</span>
+          Anthropic Research — AI Safety &amp; Alignment
+        </div>
+        <span class="arrow">→</span>
+      </a>
+    </section>
+
+    <footer>
+      <p>© 2026 Prompt Examples Reference Guide. For educational use.</p>
+    </footer>
+
+  </div>
+</body>
+</html>

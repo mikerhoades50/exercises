@@ -1,54 +1,146 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>AI Prompt Score Activity</title>
-  <style>
-    body { font-family: Arial, sans-serif; margin: 30px; line-height: 1.5; }
-    .box { border: 1px solid #ccc; padding: 16px; margin-top: 20px; border-radius: 8px; }
-    button { padding: 10px 16px; cursor: pointer; }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prompt Evaluator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f2f5;
+            margin: 0;
+            padding: 40px;
+        }
+        .container {
+            max-width: 700px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+        }
+        img {
+            width: 280px;
+            border-radius: 12px;
+            margin: 20px auto;
+            display: block;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        textarea {
+            width: 100%;
+            height: 120px;
+            padding: 12px;
+            font-size: 16px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            resize: vertical;
+        }
+        button {
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 14px 28px;
+            font-size: 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-top: 15px;
+        }
+        button:hover {
+            background: #2980b9;
+        }
+        #result {
+            margin-top: 25px;
+            padding: 18px;
+            border-radius: 10px;
+            font-size: 18px;
+            font-weight: bold;
+            text-align: center;
+            min-height: 50px;
+        }
+        .strong {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        .weak {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+    </style>
 </head>
 <body>
-  <h1>AI Prompt Score Activity</h1>
-  <p>This browser-based activity lets students test prompt scoring logic.</p>
+    <div class="container">
+        <h1>Prompt Evaluator</h1>
+        
+        <!-- Image as requested -->
+        <img src="img/brent.jpg" alt="Brent">
 
-  <div class="box">
-    <h2>Student Tasks</h2>
-    <ol>
-      <li>Create a variable called <code>promptText</code>.</li>
-      <li>Create a variable called <code>score</code>.</li>
-      <li>Write a function called <code>evaluatePrompt</code>.</li>
-      <li>If the score is 8 or higher, return <code>Strong prompt</code>.</li>
-      <li>Otherwise, return <code>Needs improvement</code>.</li>
-    </ol>
-  </div>
+        <p><strong>Enter your prompt below:</strong></p>
+        <textarea id="userPrompt" placeholder="Type your prompt here..."></textarea>
+        
+        <button onclick="evaluatePrompt()">Evaluate Prompt</button>
 
-  <button onclick="runScore()">Check Prompt Score</button>
-  <div id="output" class="box">Output will appear here.</div>
+        <div id="result"></div>
+    </div>
 
-  <script>
-    function runScore() {
-      const output = document.getElementById("output");
+    <script>
+        // 1. Create a variable called promptText
+        let promptText = "";
 
-      // STUDENTS: replace this starter solution with your own work
-      const promptText = "Write a short product description for a new AI notebook.";
-      const score = 9;
+        // 2. Create a variable called score
+        let score = 0;
 
-      function evaluatePrompt(scoreValue) {
-        if (scoreValue >= 8) {
-          return "Strong prompt";
-        } else {
-          return "Needs improvement";
+        // 3. Write a function called evaluatePrompt
+        function evaluatePrompt() {
+            // Get the text from the textarea
+            promptText = document.getElementById("userPrompt").value.trim();
+
+            if (promptText === "") {
+                document.getElementById("result").innerHTML = 
+                    "Please enter a prompt first!";
+                document.getElementById("result").className = "";
+                return;
+            }
+
+            // Simple scoring logic based on prompt quality
+            score = 0;
+
+            // Basic scoring rules
+            if (promptText.length > 50) score += 3;
+            if (promptText.length > 100) score += 3;
+            if (promptText.includes("?")) score += 2;
+            if (promptText.toLowerCase().includes("explain") || 
+                promptText.toLowerCase().includes("describe") || 
+                promptText.toLowerCase().includes("how")) score += 2;
+            if (promptText.split(" ").length > 15) score += 2;
+
+            // Cap the score at 10
+            if (score > 10) score = 10;
+
+            // 4. & 5. Check score and return message
+            const resultDiv = document.getElementById("result");
+            
+            if (score >= 8) {
+                resultDiv.innerHTML = `✅ <strong>Strong Prompt!</strong><br>Score: ${score}/10`;
+                resultDiv.className = "strong";
+            } else {
+                resultDiv.innerHTML = `⚠️ <strong>Needs Improvement</strong><br>Score: ${score}/10`;
+                resultDiv.className = "weak";
+            }
         }
-      }
 
-      output.innerHTML =
-        "<strong>Prompt:</strong> " + promptText + "<br><br>" +
-        "<strong>Score:</strong> " + score + "<br>" +
-        "<strong>Evaluation:</strong> " + evaluatePrompt(score);
-    }
-  </script>
+        // Allow pressing Enter in textarea to evaluate
+        document.getElementById("userPrompt").addEventListener("keypress", function(e) {
+            if (e.key === "Enter" && !e.shiftKey) {
+                e.preventDefault();
+                evaluatePrompt();
+            }
+        });
+    </script>
 </body>
 </html>
